@@ -1,7 +1,8 @@
-import type { NextConfig } from "next";
+import type {NextConfig} from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+    // Enable standalone output so we can deploy/run with plain Node.js
+    output: "standalone",
 };
 
 export default nextConfig;

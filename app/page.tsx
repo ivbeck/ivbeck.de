@@ -1,103 +1,103 @@
-import Image from "next/image";
+"use client";
+
+import {motion} from "framer-motion";
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    return (
+        <main
+            className="relative min-h-dvh overflow-hidden bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-slate-100">
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+            <div className="pointer-events-none absolute inset-0">
+                <div className="absolute -top-32 -left-32 h-72 w-72 rounded-full bg-fuchsia-500/20 blur-3xl"/>
+                <div className="absolute -bottom-24 -right-24 h-80 w-80 rounded-full bg-cyan-400/20 blur-3xl"/>
+            </div>
+
+            <motion.div
+                className="pointer-events-none absolute left-10 top-24 size-8 rounded-full bg-fuchsia-400/70 shadow-[0_0_60px_10px_rgba(244,114,182,0.35)]"
+                initial={{y: 0, x: 0, opacity: 0}}
+                animate={{y: [0, -18, 0, 14, 0], x: [0, 6, -4, 8, 0], opacity: 1}}
+                transition={{duration: 8, repeat: Infinity, ease: "easeInOut"}}
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+            <motion.div
+                className="pointer-events-none absolute right-16 top-40 size-6 rounded-full bg-cyan-300/70 shadow-[0_0_60px_10px_rgba(103,232,249,0.35)]"
+                initial={{y: 0, x: 0, opacity: 0}}
+                animate={{y: [0, 22, 0, -14, 0], x: [0, -8, 6, -10, 0], opacity: 1}}
+                transition={{duration: 7, repeat: Infinity, ease: "easeInOut", delay: 0.6}}
+            />
+            <motion.div
+                className="pointer-events-none absolute right-1/3 bottom-28 size-4 rounded-full bg-amber-300/80 shadow-[0_0_50px_8px_rgba(252,211,77,0.35)]"
+                initial={{scale: 0, opacity: 0}}
+                animate={{scale: [1, 1.25, 1], opacity: [0.8, 1, 0.8]}}
+                transition={{duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 0.3}}
+            />
+
+            <section
+                className="relative mx-auto flex min-h-dvh max-w-4xl flex-col items-center justify-center px-6 text-center">
+                <motion.div
+                    initial={{opacity: 0, y: 12}}
+                    animate={{opacity: 1, y: 0}}
+                    transition={{duration: 0.6, ease: "easeOut"}}
+                    className="mb-5"
+                >
+                    <motion.span
+                        className="inline-flex items-center gap-2 rounded-full border border-slate-700/60 bg-slate-800/50 px-4 py-1.5 text-sm text-slate-200 shadow-sm backdrop-blur"
+                        initial={{scale: 0.9}}
+                        animate={{scale: [1, 1.04, 1]}}
+                        transition={{duration: 2.8, repeat: Infinity, ease: "easeInOut"}}
+                    >
+                        <span
+                            className="inline-block size-2.5 rounded-full bg-emerald-400 shadow-[0_0_12px_2px_rgba(52,211,153,0.7)]"/>
+                        WIP: Cooking something delightful
+                    </motion.span>
+                </motion.div>
+
+                <motion.h1
+                    className="text-balance bg-gradient-to-br from-white via-slate-100 to-slate-300 bg-clip-text text-5xl font-extrabold leading-tight text-transparent sm:text-6xl"
+                    initial={{opacity: 0, y: 10}}
+                    animate={{opacity: 1, y: 0}}
+                    transition={{duration: 0.8, ease: "easeOut", delay: 0.05}}
+                >
+                    Almost ready to launch
+                </motion.h1>
+
+                <motion.p
+                    className="mt-4 max-w-2xl text-pretty text-slate-300/85 sm:text-lg"
+                    initial={{opacity: 0, y: 10}}
+                    animate={{opacity: 1, y: 0}}
+                    transition={{duration: 0.7, ease: "easeOut", delay: 0.15}}
+                >
+                    Building a smooth, fast experience. In the meantime, enjoy a little motion magic.
+                </motion.p>
+
+
+                <motion.svg
+                    width="220"
+                    height="26"
+                    viewBox="0 0 220 26"
+                    className="pointer-events-none mt-8 text-fuchsia-400/70"
+                    initial={{opacity: 0}}
+                    animate={{opacity: 1, pathLength: [0, 1]}}
+                    transition={{duration: 1.2, ease: "easeInOut", delay: 0.35}}
+                >
+                    <motion.path
+                        d="M2 14 C 22 2, 42 26, 62 14 S 102 2, 122 14 162 26, 182 14 202 2, 218 14"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="3"
+                        initial={{pathLength: 0}}
+                        animate={{pathLength: 1}}
+                        transition={{duration: 1.6, ease: "easeInOut", delay: 0.35}}
+                    />
+                </motion.svg>
+            </section>
+
+
+            <motion.div
+                className="pointer-events-none absolute -right-20 top-10 h-1 w-1 rounded-full bg-white shadow-[0_0_16px_6px_rgba(255,255,255,0.7)]"
+                initial={{x: 0, y: 0, opacity: 0}}
+                animate={{x: [-40, -360], y: [0, 240], opacity: [0, 1, 0]}}
+                transition={{duration: 3.2, repeat: Infinity, delay: 1.2, ease: "easeInOut"}}
+            />
+        </main>
+    );
 }

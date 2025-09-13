@@ -1,0 +1,37 @@
+# /etc/conf.d/ivbeck-node
+# Configuration for the ivbeck-node OpenRC service
+
+# Path to Node.js binary
+NODE_BIN="/usr/bin/node"
+
+# Absolute path to your app's entry file
+APP_PATH="/srv/server.js"
+
+# Working directory to run the process from
+WORKDIR="/srv"
+
+# User/group to run the service as (ensure they have access to APP_PATH and WORKDIR)
+RUN_AS="node"
+RUN_AS_GROUP="node"
+
+# Environment
+NODE_ENV="production"
+PORT="3000"
+
+# Additional Node.js arguments (optional)
+# e.g., enable experimental features or set memory limit
+NODE_ARGS=""
+
+# Log file for both stdout and stderr
+LOGFILE="/var/log/ivbeck-node.log"
+
+# Auto-respawn settings (handled by supervise-daemon)
+# Some Alpine builds do not support a bare --respawn flag; configure using respawn-* options.
+# Set RESPAWN to "yes" to enable, then optionally tune:
+# - RESPAWN_MAX: max respawns within RESPAWN_PERIOD before giving up (0 to not set a limit)
+# - RESPAWN_DELAY: delay in seconds before each respawn attempt
+# - RESPAWN_PERIOD: time window in seconds for RESPAWN_MAX attempts
+RESPAWN="yes"
+RESPAWN_MAX="0"
+RESPAWN_DELAY="5"
+RESPAWN_PERIOD="60"

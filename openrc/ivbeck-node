@@ -1,0 +1,83 @@
+#!/sbin/openrc-run
+#
+# OpenRC service to run a Node.js app as a daemon on Alpine Linux
+# Default app entrypoint: /srv/server.js
+# Place a config at /etc/conf.d/ivbeck-node (or copy openrc/ivbeck-node.confd)
+# to override variables like APP_PATH, RUN_AS, NODE_ENV, PORT, LOGFILE, etc.
+
+name="${RC_SVCNAME:-ivbeck-node}"
+description="Node.js service for ${APP_PATH:-/srv/server.js}"
+
+# Configuration (overridable via /etc/conf.d/ivbeck-node)
+NODE_BIN="${NODE_BIN:-/usr/bin/node}"
+APP_PATH="${APP_PATH:-/srv/server.js}"
+WORKDIR="${WORKDIR:-/srv}"
+RUN_AS="${RUN_AS:-node}"
+RUN_AS_GROUP="${RUN_AS_GROUP:-${RUN_AS}}"
+NODE_ENV="${NODE_ENV:-production}"
+PORT="${PORT:-3000}"
+NODE_ARGS="${NODE_ARGS:-}"
+LOGFILE="${LOGFILE:-/var/log/${RC_SVCNAME}.log}"
+# Respawn configuration (compatible with supervise-daemon on Alpine)
+RESPAWN="${RESPAWN:-yes}"
+RESPAWN_DELAY="${RESPAWN_DELAY:-5}"
+RESPAWN_MAX="${RESPAWN_MAX:-0}"
+RESPAWN_PERIOD="${RESPAWN_PERIOD:-0}"
+
+# Directives for supervise-daemon
+command="${NODE_BIN}"
+command_args="${NODE_ARGS} ${APP_PATH}"
+directory="${WORKDIR}"
+
+# Logging (stdout/stderr) and respawn handled by supervise-daemon
+supervise_daemon_args="--stdout ${LOGFILE} --stderr ${LOGFILE}"
+if [ "${RESPAWN}" = "yes" ]; then
+	# Some Alpine builds do not support a bare --respawn flag; use respawn-* options
+	# Only add delay/period if a max > 0 or explicit period provided
+	if [ "${RESPAWN_MAX}" != "0" ]; then
+		supervise_daemon_args="${supervise_daemon_args} --respawn-max ${RESPAWN_MAX}"
+	fi
+	if [ -n "${RESPAWN_DELAY}" ] && [ "${RESPAWN_DELAY}" != "0" ]; then
+		supervise_daemon_args="${supervise_daemon_args} --respawn-delay ${RESPAWN_DELAY}"
+	fi
+	if [ -n "${RESPAWN_PERIOD}" ] && [ "${RESPAWN_PERIOD}" != "0" ]; then
+		supervise_daemon_args="${supervise_daemon_args} --respawn-period ${RESPAWN_PERIOD}"
+	fi
+fi
+
+depend() {
+	need net
+	use dns logger
+}
+
+start_pre() {
+	# Ensure log file exists with correct ownership/permissions
+	checkpath -d -m 0755 /var/log
+	checkpath -f -m 0644 -o "${RUN_AS}:${RUN_AS_GROUP}" "${LOGFILE}"
+}
+
+start() {
+	ebegin "Starting ${RC_SVCNAME}"
+	# Export environment for the Node app
+	export NODE_ENV="${NODE_ENV}"
+	export PORT="${PORT}"
+	# Start under supervise-daemon for proper backgrounding and optional respawn
+	supervise-daemon "${RC_SVCNAME}" \
+		--start \
+		--user "${RUN_AS}" \
+		--group "${RUN_AS_GROUP}" \
+		--chdir "${directory}" \
+		${supervise_daemon_args} \
+		-- "${command}" ${command_args}
+	eend $?
+}
+
+stop() {
+	ebegin "Stopping ${RC_SVCNAME}"
+	supervise-daemon "${RC_SVCNAME}" --stop
+	eend $?
+}
+
+status() {
+	supervise-daemon "${RC_SVCNAME}" --status
+}
