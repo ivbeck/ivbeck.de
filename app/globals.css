@@ -1,26 +1,71 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Base theme vars */
+html {
+    color-scheme: light;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+html.dark,
+html[data-theme="dark"] {
+    color-scheme: dark;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Base elements */
+html, body {
+    height: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+    transition-property: background-color, border-color, color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+}
+
+/* Selection */
+::selection {
+    background-color: rgb(192 132 252 / 0.35); /* purple-400/35 */
+    color: #fff;
+}
+
+/*****************
+ Canonical layout
+*****************/
+.container {
+    max-width: 80rem; /* ~1280px */
+}
+
+/* Links */
+a {
+    @apply underline-offset-4 decoration-transparent hover:decoration-current;
+}
+
+/* Scrollbar (webkit) */
+*::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: rgb(148 163 184 / 0.6);
+    border-radius: 9999px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(148 163 184 / 0.9);
+}
+
+/* Code, pre defaults (if needed later) */
+code, pre {
+    font-feature-settings: "ss01" on, "ss02" on;
 }

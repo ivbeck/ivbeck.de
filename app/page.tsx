@@ -5,7 +5,7 @@ import {motion} from "framer-motion";
 export default function Home() {
     return (
         <main
-            className="relative min-h-dvh overflow-hidden bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-slate-100">
+            className="relative min-h-dvh overflow-hidden bg-gradient-to-b from-slate-50 via-slate-100 to-slate-50 text-slate-900 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 dark:text-slate-100">
 
             <div className="pointer-events-none absolute inset-0">
                 <div className="absolute -top-32 -left-32 h-72 w-72 rounded-full bg-fuchsia-500/20 blur-3xl"/>
@@ -40,7 +40,7 @@ export default function Home() {
                     className="mb-5"
                 >
                     <motion.span
-                        className="inline-flex items-center gap-2 rounded-full border border-slate-700/60 bg-slate-800/50 px-4 py-1.5 text-sm text-slate-200 shadow-sm backdrop-blur"
+                        className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white/70 px-4 py-1.5 text-sm text-slate-800 shadow-sm backdrop-blur dark:border-slate-700/60 dark:bg-slate-800/50 dark:text-slate-200"
                         initial={{scale: 0.9}}
                         animate={{scale: [1, 1.04, 1]}}
                         transition={{duration: 2.8, repeat: Infinity, ease: "easeInOut"}}
@@ -52,7 +52,7 @@ export default function Home() {
                 </motion.div>
 
                 <motion.h1
-                    className="text-balance bg-gradient-to-br from-white via-slate-100 to-slate-300 bg-clip-text text-5xl font-extrabold leading-tight text-transparent sm:text-6xl"
+                    className="text-balance bg-gradient-to-br from-slate-900 via-slate-700 to-slate-900 dark:from-white dark:via-slate-100 dark:to-slate-300 bg-clip-text text-5xl font-extrabold leading-tight text-transparent sm:text-6xl"
                     initial={{opacity: 0, y: 10}}
                     animate={{opacity: 1, y: 0}}
                     transition={{duration: 0.8, ease: "easeOut", delay: 0.05}}
@@ -61,7 +61,7 @@ export default function Home() {
                 </motion.h1>
 
                 <motion.p
-                    className="mt-4 max-w-2xl text-pretty text-slate-300/85 sm:text-lg"
+                    className="mt-4 max-w-2xl text-pretty text-slate-600 sm:text-lg dark:text-slate-300/85"
                     initial={{opacity: 0, y: 10}}
                     animate={{opacity: 1, y: 0}}
                     transition={{duration: 0.7, ease: "easeOut", delay: 0.15}}
@@ -93,7 +93,7 @@ export default function Home() {
 
 
             <motion.div
-                className="pointer-events-none absolute -right-20 top-10 h-1 w-1 rounded-full bg-white shadow-[0_0_16px_6px_rgba(255,255,255,0.7)]"
+                className="pointer-events-none absolute -right-20 top-10 h-1 w-1 rounded-full bg-fuchsia-500/70 shadow-[0_0_16px_6px_rgba(244,114,182,0.7)] dark:bg-white dark:shadow-[0_0_16px_6px_rgba(255,255,255,0.7)]"
                 initial={{x: 0, y: 0, opacity: 0}}
                 animate={{x: [-40, -360], y: [0, 240], opacity: [0, 1, 0]}}
                 transition={{duration: 3.2, repeat: Infinity, delay: 1.2, ease: "easeInOut"}}
